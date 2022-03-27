@@ -4,6 +4,7 @@
 
 body {
     margin: 0px;
+    background-color : papayawhip;
 }
 
 #search-result-box {
@@ -197,7 +198,7 @@ button {
 .header {
     height: 255px;
     box-sizing: border-box;
-    background-color: #15aabf;
+    background-color: orange;
     color: white;
     text-align: center;
     padding-top: 80px;
@@ -341,7 +342,7 @@ button {
 
 #login-form {
     width: 538px;
-    height: 710px;
+    height: 750px;
     margin: 70px auto 141px auto;
     display: flex;
     flex-direction: column;
@@ -458,7 +459,7 @@ button {
     margin: 40px 0 0;
     padding: 11px 12px;
     border-radius: 5px;
-    background-color: #15aabf;
+    background-color: orange;
 
     font-family: SpoqaHanSansNeo;
     font-size: 20px;
