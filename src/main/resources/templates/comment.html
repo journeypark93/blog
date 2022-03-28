@@ -9,7 +9,7 @@
     <meta property="og:description" content="항해99를 하며 나만의 일기를 기록해보세요.">
     <meta property="og:image" content="images/hang.png">
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/comment.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title>더보기</title>
@@ -18,6 +18,7 @@
         $(document).ready(function () {
 
             getMessages();
+            getComments();
         })
 
         function searchParam(key) {
@@ -76,6 +77,77 @@
             // 2. #cards-box 에 HTML을 붙인다.
             $('#cards-box').append(tempHtml);
         }
+
+
+//여기부터 고쳐주세요~~~ id 값이 자동생성되면서, 중구난방되브러요요요~~~
+        function writeComment(){
+            // let id = searchParam('id');
+            let username = $('#username').val();
+            let comments = $('#comments').val();
+            // 4. 전달할 data JSON으로 만듭니다.
+            let data = {'username': username, 'comments': comments};
+            // 5. POST /api/memos 에 data를 전달합니다.
+            $.ajax({
+                type: "POST",
+                url: "/comments",
+                contentType: "application/json", // JSON 형식으로 전달함을 알리기
+                data: JSON.stringify(data),
+                success: function (response) {
+                    alert('댓글이 성공적으로 작성되었습니다.');
+                    window.location.reload();
+                }
+            })
+        }
+
+
+
+        // 메모를 불러와서 보여줍니다.
+        function getComments() {
+            // 1. 기존 메모 내용을 지웁니다.
+            $('#comments-box').empty();
+            // 2. 메모 목록을 불러와서 HTML로 붙입니다.
+            $.ajax({
+                type: 'GET',
+                url: '/api/comments/',
+                success: function (response) {
+                    for (let i = 0; i < response.length; i++) {
+                        let comments = response[i];
+                        let id = comments.id;
+                        let username = comments.username;
+                        let comment = comments.comments;
+                        let date = comments.modifiedAt;
+                        let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
+                        addHTML2(id, username, comment, modifiedAt);
+                    }
+                }
+            })
+        }
+
+        // 메모 하나를 HTML로 만들어서 body 태그 내 원하는 곳에 붙입니다.
+        function addHTML2(id, username, comment, modifiedAt) {
+            // 1. HTML 태그를 만듭니다.
+            // language=HTML
+            let tempHtml = `
+                <div class="card">
+                    <!-- date/username 영역 -->
+                    <div class="metadata">
+                        <div class="date">
+                            ${modifiedAt}
+                        </div>
+                        <div id="${id}-username" class="username">
+                            <span>작성자 : </span> ${username}
+                        </div>
+                    </div>
+                    <!-- 댓글 조회 영역-->
+                    <div class="contents">
+                        <div id="${id}-comment" class="title mytitle">
+                            <span>댓글 : </span> ${comment}
+                        </div>
+                    </div>
+                </div>`;
+            // 2. #cards-box 에 HTML을 붙인다.
+            $('#comments-box').append(tempHtml);
+        }
     </script>
 
 
@@ -98,6 +170,17 @@
 </div>
 
 <div id="cards-box" class="area-read">
+</div>
+
+<div class="area-write">
+    <input type="hidden" id="username" th:value="${username}"/>
+    <textarea class="field" name="contents" id="comments" cols="50" rows="10" placeholder="댓글을 적어주세요"></textarea>
+    <!--            <button class="btn btn-danger" onclick="writePost()">작성하기</button>-->
+    <img src="/images/send.png" alt="" onclick="writeComment()">
+</div>
+
+<div id="comments-box">
+
 </div>
 
 <div th:if="${admin_role}" id="admin"></div>

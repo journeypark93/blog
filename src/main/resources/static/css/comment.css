@@ -1,0 +1,249 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+    margin: 0px;
+    background-color : papayawhip;
+}
+
+
+button {
+    color: white;
+    border-radius: 4px;
+    border-radius: none;
+}
+
+.header {
+    height: 255px;
+    box-sizing: border-box;
+    background-color: orange;
+    color: white;
+    text-align: center;
+    padding-top: 80px;
+    /*padding: 50px;*/
+    font-size: 45px;
+    font-weight: bold;
+}
+
+#header-title-login-user {
+    font-size: 36px;
+    letter-spacing: -1.08px;
+}
+
+#header-title-select-shop {
+    margin-top: 20px;
+    font-size: 45px;
+    letter-spacing: 1.1px;
+}
+
+.none {
+    display: none;
+}
+
+#logout-text {
+    position:absolute;
+    top:48px;
+    right:48px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert {
+    width: 300px;
+    margin-top: 22px;
+    padding: 1.75rem 1.25rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.click{
+    font-size: 25px;
+    color : darkgray;
+}
+
+
+.click:hover{
+    color : darkorange;
+    text-decoration:underline;
+}
+
+
+.area-write {
+    width: 538px;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.my-area-write{
+    width: 538px;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top : 250px;
+}
+
+.area-write img {
+    cursor: pointer;
+    position: absolute;
+    width: 22.2px;
+    height: 18.7px;
+    bottom: 15px;
+    right: 17px;
+}
+
+textarea.field {
+    width: 502px !important;
+    height: 100px;
+    border-radius: 5px;
+    background-color: gainsboro;
+    border: none;
+    padding: 18px;
+    resize: none;
+}
+
+textarea.field::placeholder {
+    width: 216px;
+    height: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    text-align: left;
+}
+
+.form-control {
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+/*////*/
+.card {
+    width: 538px;
+    height: 150px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 12px;
+}
+
+.card .metadata {
+    position: relative;
+    display: flex;
+    font-family: 'Spoqa Han Sans';
+    font-size: 11px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.77px;
+    text-align: left;
+    color: #adb5bd;
+    height: 14px;
+    padding: 10px 23px;
+}
+
+.card .metadata .date {
+
+}
+
+.card .metadata .username {
+    margin-left: 20px;
+}
+
+.contents {
+    padding: 0px 23px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+#cards-box {
+    margin-top: 250px;
+}
+
+.mybtn {
+    display: block;
+    margin: auto;
+    width: 100px;
+    margin-bottom: 60px;
+}
+.date{
+    font-size : 13px;
+}
+
+.username{
+    font-size : 13px;
+    margin-top : 1px;
+}
+.more_btn{
+    margin-top: 20px;
+}
+.mytitle{
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 5px;
+    font-size : 20px;
+}
+
+.mytext{
+    font-weight: bold;
+    margin: 20px 0 15px 5px;
+    font-size : 20px;
+}
+
+.footer {
+    position: relative;
+    height: 40px;
+}
+
+.footer img.icon-start-edit {
+    cursor: pointer;
+    position: absolute;
+    bottom: 14px;
+    right: 55px;
+    width: 18px;
+    height: 18px;
+}
+
+.footer img.icon-end-edit {
+    cursor: pointer;
+    position: absolute;
+    display: none;
+    bottom: 14px;
+    right: 55px;
+    width: 20px;
+    height: 15px;
+}
+
+.footer img.icon-delete {
+    cursor: pointer;
+    position: absolute;
+    bottom: 50px;
+    right: 19px;
+    width: 14px;
+    height: 18px;
+}
