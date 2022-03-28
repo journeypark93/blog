@@ -32,4 +32,6 @@ public class WriteController {
     public List<Blog> getBlog(){
         return blogRepository.findAllByOrderByModifiedAtDesc();
     }
+
+
 }

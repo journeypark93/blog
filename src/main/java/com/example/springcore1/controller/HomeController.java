@@ -30,5 +30,10 @@ public class HomeController {
         return "write";
     }
 
+    @GetMapping("/blogs/comment")
+    public String content(){
+        return "comment";
+    }
+
 }
 

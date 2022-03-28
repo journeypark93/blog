@@ -1,10 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="나만의 항해블로그">
+    <meta property="og:description" content="항해99를 하며 나만의 일기를 기록해보세요.">
+    <meta property="og:image" content="images/hang.png">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>더보기</title>
+
+    <script>
+        $(document).ready(function () {
+
+            getMessages();
+        })
+
+        function searchParam(key) {
+            return new URLSearchParams(location.search).get(key);
+        }
+
+
+        function getMessages() {
+            let my_id = searchParam('id');
+            $.ajax({
+                type: 'GET',
+                url: '/api/blogs/',
+                success: function (response) {
+                    let len = response.length + 1;
+                    let blog = response[len - my_id];
+                    let id = blog.id;
+                    let username = blog.username;
+                    let title = blog.title;
+                    let contents = blog.contents;
+                    let date = blog.modifiedAt;
+                    let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
+                    console.log(id);
+                    addHTML(id, username, title, contents, modifiedAt);
+                }
+            })
+        }
+
+        function addHTML(id, username, title, contents, modifiedAt) {
+            let tempHtml = `
+                <div class="card">
+                    <!-- date/username 영역 -->
+                    <div class="metadata">
+                        <div class="date">
+                            ${modifiedAt}
+                        </div>
+                        <div id="${id}-username" class="username">
+                            <span>작성자 : </span> ${username}
+                        </div>
+                    </div>
+
+                    <!-- title, contents 조회영역-->
+                    <div class="contents">
+                        <div id="${id}-title" class="title mytitle">
+                            <span>제목 : </span> ${title}
+                        </div>
+                        <div id="${id}-contents" class="text mytext">
+                            <span>내용 : </span> ${contents}
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        <img src="/images/delete.png" class="icon-delete" alt="">
+<!--                        onclick="writePost()"-->
+                    </div>
+                </div>`;
+            // 2. #cards-box 에 HTML을 붙인다.
+            $('#cards-box').append(tempHtml);
+        }
+    </script>
+
+
 <body>
+<div class="header" style="position:relative;">
+    <div id="header-title-login-user">
+        <span>나만의 항해</span>
+    </div>
+    <div id="header-title-select-shop">
+        이야기를 들려주세요
+    </div>
+    <img src="/images/bae.png" alt="" width="100px">
+    <div>
+        <span style="cursor:pointer;" class="click" onclick="location.href='/'">HOME</span>
+    </div>
+
+    <form id="my_form" method="post" action="/user/logout">
+        <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
+    </form>
+</div>
+
+<div id="cards-box" class="area-read">
+</div>
+
+<div th:if="${admin_role}" id="admin"></div>
+
 
 </body>
 </html>
