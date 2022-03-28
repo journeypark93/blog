@@ -342,7 +342,7 @@ button {
 
 #login-form {
     width: 538px;
-    height: 750px;
+    height: 800px;
     margin: 70px auto 141px auto;
     display: flex;
     flex-direction: column;
@@ -675,7 +675,7 @@ button {
     .header {
         height: 255px;
         box-sizing: border-box;
-        background-color: #15aabf;
+        background-color: orange;
         color: white;
         text-align: center;
         padding-top: 80px;
