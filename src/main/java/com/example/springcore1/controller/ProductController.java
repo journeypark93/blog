@@ -20,6 +20,7 @@ public class ProductController {
 
     @Autowired
     public ProductController(ProductService productService) {
+
         this.productService = productService;
     }
 
@@ -50,7 +51,6 @@ public class ProductController {
     public List<Product> getProducts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         // 로그인 되어 있는 회원 테이블의 ID
         Long userId = userDetails.getUser().getId();
-
         return productService.getProducts(userId);
     }
 

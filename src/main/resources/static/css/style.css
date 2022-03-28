@@ -684,77 +684,6 @@ button {
         font-weight: bold;
     }
 
-    /*#product-container {*/
-    /*    grid-template-columns: 100px 50px 100px;*/
-    /*    grid-template-rows: 80px auto 80px;*/
-    /*    column-gap: 10px;*/
-    /*    row-gap: 15px;*/
-    /*}*/
-
-    /*.product-card {*/
-    /*    width: 300px;*/
-    /*    margin: auto;*/
-    /*    cursor: pointer;*/
-    /*}*/
-
-    /*.product-card .card-header {*/
-    /*    width: 300px;*/
-    /*}*/
-
-    /*.product-card .card-header img {*/
-    /*    width: 300px;*/
-    /*}*/
-
-    /*.product-card .card-body {*/
-    /*    margin-top: 15px;*/
-    /*}*/
-
-    /*.product-card .card-body .title {*/
-    /*    font-size: 15px;*/
-    /*    font-weight: normal;*/
-    /*    font-stretch: normal;*/
-    /*    font-style: normal;*/
-    /*    line-height: 1;*/
-    /*    letter-spacing: -0.75px;*/
-    /*    text-align: left;*/
-    /*    color: #343a40;*/
-    /*    margin-bottom: 10px;*/
-    /*    overflow: hidden;*/
-    /*    white-space: nowrap;*/
-    /*    text-overflow: ellipsis;*/
-    /*}*/
-
-    /*.product-card .card-body .lprice {*/
-    /*    font-size: 15.8px;*/
-    /*    font-weight: normal;*/
-    /*    font-stretch: normal;*/
-    /*    font-style: normal;*/
-    /*    line-height: 1;*/
-    /*    letter-spacing: -0.79px;*/
-    /*    color: #000000;*/
-    /*    margin-bottom: 10px;*/
-    /*}*/
-
-    /*.product-card .card-body .lprice span {*/
-    /*    font-size: 21.4px;*/
-    /*    font-weight: 600;*/
-    /*    font-stretch: normal;*/
-    /*    font-style: normal;*/
-    /*    line-height: 1;*/
-    /*    letter-spacing: -0.43px;*/
-    /*    text-align: left;*/
-    /*    color: #E8344E;*/
-    /*}*/
-
-    /*.product-card .card-body .isgood {*/
-    /*    margin-top: 10px;*/
-    /*    padding: 10px 20px;*/
-    /*    color: white;*/
-    /*    border-radius: 2.6px;*/
-    /*    background-color: #ff8787;*/
-    /*    width: 48px;*/
-    /*}*/
-
     .none {
         display: none;
     }
@@ -780,7 +709,7 @@ button {
 }
 input {
     border: 1px solid transparent;
-    background-color: #f1f1f1;
+    background-color: white;
     padding: 10px;
     font-size: 16px;
 }
@@ -835,4 +764,134 @@ input[type=submit] {
     padding: 1.75rem 1.25rem;
     border: 1px solid transparent;
     border-radius: .25rem;
+}
+
+.click{
+    font-size: 25px;
+    color : darkgray;
+}
+
+
+.click:hover{
+    color : darkorange;
+    text-decoration:underline;
+}
+
+
+.area-write {
+    width: 538px;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top : 250px;
+}
+
+.area-write img {
+    cursor: pointer;
+    position: absolute;
+    width: 22.2px;
+    height: 18.7px;
+    bottom: 15px;
+    right: 17px;
+}
+
+textarea.field {
+    width: 502px !important;
+    height: 146px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: none;
+    padding: 18px;
+    resize: none;
+}
+
+textarea.field::placeholder {
+    width: 216px;
+    height: 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.96px;
+    text-align: left;
+}
+
+.form-control {
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+/*////*/
+.card {
+    width: 538px;
+    height: 150px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 12px;
+}
+
+.card .metadata {
+    position: relative;
+    display: flex;
+    font-family: 'Spoqa Han Sans';
+    font-size: 11px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.77px;
+    text-align: left;
+    color: #adb5bd;
+    height: 14px;
+    padding: 10px 23px;
+}
+
+.card .metadata .date {
+
+}
+
+.card .metadata .username {
+    margin-left: 20px;
+}
+
+.contents {
+    padding: 0px 23px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+#cards-box {
+    margin-top: 250px;
+}
+
+.mybtn {
+    display: block;
+    margin: auto;
+    width: 100px;
+    margin-bottom: 60px;
+}
+.date{
+    font-size : 13px;
+}
+
+.username{
+    font-size : 13px;
+    margin-top : 1px;
+}
+.more_btn{
+    margin-top: 20px;
+}
+.mytitle{
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 5px;
+    font-size : 20px;
 }

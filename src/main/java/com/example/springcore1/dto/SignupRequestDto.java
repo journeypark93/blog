@@ -1,3 +1,5 @@
+//필요없을 것 같으니 마지막에 지워보쟝!  userrequestdto 에 다시 만ㄷ르으므음ㄹ
+
 package com.example.springcore1.dto;
 
 import lombok.Getter;

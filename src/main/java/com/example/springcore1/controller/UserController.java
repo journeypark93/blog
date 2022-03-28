@@ -25,6 +25,7 @@ public class UserController {
     private final KakaoUserService kakaoUserService;
     private final CheckUsernameValidator checkUsernameValidator;
 
+
     /* 커스텀 유효성 검증을 위해 추가 */
     @InitBinder
     public void validatorBinder(WebDataBinder binder) {
@@ -57,6 +58,8 @@ public class UserController {
 //        userService.registerUser(requestDto);
 //        return "redirect:/user/login";
 //    }
+
+
     //회원가입 요청 처리
     @PostMapping("/user/signup")
     public String execSignup(@Valid UserRequestDto requestDto, Errors errors, Model model) {

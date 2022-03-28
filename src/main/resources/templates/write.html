@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:title" content="나만의 항해블로그">
+    <meta property="og:description" content="항해99를 하며 나만의 일기를 기록해보세요.">
+    <meta property="og:image" content="images/hang.png">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>글쓰기</title>
+
+    <script>
+        // 사용자가 내용을 올바르게 입력하였는지 확인합니다.
+        function isValidContents(contents) {
+            if (contents == '') {
+                alert('내용을 입력해주세요');
+                return false;
+            }
+            if (contents.trim().length > 140) {
+                alert('공백 포함 140자 이하로 입력해주세요');
+                return false;
+            }
+            return true;
+        }
+
+        // 메모를 생성합니다.
+        function writePost() {
+            // 1. 작성한 메모, 제목을 불러옵니다.
+            let contents = $('#contents').val();
+            let username = $('#username').val();
+            let title = $('#title').val();
+            // 2. 작성한 메모가 올바른지 isValidContents 함수를 통해 확인합니다.
+            if (isValidContents(contents) == false) {
+                return;
+            }
+            // 4. 전달할 data JSON으로 만듭니다.
+            let data = {'title': title, 'username': username, 'contents': contents};
+            // 5. POST /api/memos 에 data를 전달합니다.
+            $.ajax({
+                type: "POST",
+                url: "/blogs",
+                contentType: "application/json", // JSON 형식으로 전달함을 알리기
+                data: JSON.stringify(data),
+                success: function (response) {
+                    alert('메시지가 성공적으로 작성되었습니다.');
+                    document.location.href = '/';
+                }
+            })
+        }
+
+    </script>
+</head>
+
+
+<body>
+    <div class="header" style="position:relative;">
+        <div id="header-title-login-user">
+            <span>나만의 항해</span>
+        </div>
+        <div id="header-title-select-shop">
+            이야기를 들려주세요
+        </div>
+        <img src="images/bae.png" alt="" width="100px">
+        <div>
+            <span style="cursor:pointer;" class="click" onclick="location.href='/'">HOME</span>
+        </div>
+
+        <form id="my_form" method="post" action="/user/logout">
+            <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
+        </form>
+    </div>
+
+    <div class="area-write">
+        <input type="hidden" id="username" th:value="${username}"/>
+        <input type="text" class="form-control" id="title" placeholder="제목"/>
+        <textarea class="field" name="contents" id="contents" cols="30" rows="10" placeholder="당신의 이야기를 적어주세요"></textarea>
+        <!--            <button class="btn btn-danger" onclick="writePost()">작성하기</button>-->
+        <img src="images/send.png" alt="" onclick="writePost()">
+    </div>
+</body>
+</html>
