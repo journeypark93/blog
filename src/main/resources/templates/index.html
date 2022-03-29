@@ -24,12 +24,12 @@
             // HTML 문서를 로드할 때마다 실행합니다.
             getMessages();
             showLog();
+            hideNull();
         })
 
         //회원가입, 로그인, 로그아웃 가리고 보이기
         function showLog(){
             let userRole = $('#user').val();
-            console.log(userRole);
             if(userRole == "true") {
                 $(`#logout-text`).show();
                 $(`#login-text`).hide();
@@ -39,15 +39,26 @@
             }
         }
 
-        // function showComment(){
-        //     let userRole = $('#user').val();
-        //     let myId = $(`#id`);
-        //     if(userRole == "true") {
-        //         document.location.href='/blogs/comment?id=${id}';
-        //     } else{
-        //         document.location.href='/blogs/comment/view';
-        //     }
-        // }
+        //null님의 가리기
+        function hideNull(){
+            let noName = $('#null').text();
+            console.log(noName);
+            if( noName =="null님의"){
+                $('#null').hide();
+            }
+
+        }
+
+        function showComment(id){
+            let userRole = $('#user').val();
+            let myId = id;
+            let url = '/blogs/comment?id=' +  myId;
+            if(userRole == "true") {
+                document.location.href=url;
+            } else{
+                document.location.href='/blogs/comment/view?id=' + myId;
+            }
+        }
 
         // 메모를 불러와서 보여줍니다.
         function getMessages() {
@@ -94,13 +105,14 @@
                         </div>
                         <div id="${id}-id" class="id">
                             <button type="button" class="btn btn-light more_btn"
-                                    onclick="location.href='/blogs/comment?id=${id}'">더보기
+                                    onclick="showComment('${id}')">더보기
                             </button>
                         </div>
                     </div>
                 </div>`;
             // 2. #cards-box 에 HTML을 붙인다.
             $('#cards-box').append(tempHtml);
+
         }
 
 
@@ -129,7 +141,7 @@
     </span>
     <div id="header-title-login-user">
         <span>나만의 항해</span>
-        <span th:text="${username}"></span> 님의
+        <div id="null" th:text="${username} +님의"></div>
     </div>
     <div id="header-title-select-shop">
         이야기를 들려주세요

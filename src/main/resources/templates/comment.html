@@ -161,10 +161,9 @@
             let comments = $('#comments').val();
             let user_role = $('#user').val();
 
-//비로그인자도 되면 수정하세요~
             if(user_role != "true"){
                 alert("로그인이 필요합니다.");
-                document.location.href('/user/login');
+                document.location.href='/user/login';
             }
 
             if (isValidContents(comments) == false) {

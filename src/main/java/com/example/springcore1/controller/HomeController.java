@@ -33,9 +33,6 @@ public class HomeController {
     public String write(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
         model.addAttribute("username", userDetails.getUsername());
 
-//        if(userDetails.getUser().getRole() != UserRoleEnum.USER) {
-//            return "redirect:/user/login";
-//        }
         return "write";
     }
 

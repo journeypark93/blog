@@ -31,6 +31,7 @@ public class CommentController {
         return commentRepository.findAllByOrderByModifiedAtDesc();
     }
 
+
     //삭제(Delete)
     @DeleteMapping("/api/comments/{id}")
     public Long deleteComment(@PathVariable Long id) {
