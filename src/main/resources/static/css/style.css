@@ -4,7 +4,7 @@
 
 body {
     margin: 0px;
-    background-color : papayawhip;
+    background-color: papayawhip;
 }
 
 
@@ -37,7 +37,7 @@ button {
     background-color: orange;
     color: white;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 50px;
     /*padding: 50px;*/
     font-size: 45px;
     font-weight: bold;
@@ -187,9 +187,9 @@ button {
 }
 
 #logout-text {
-    position:absolute;
-    top:48px;
-    right:48px;
+    position: absolute;
+    top: 48px;
+    right: 48px;
     font-size: 18px;
     font-family: SpoqaHanSansNeo;
     font-size: 18px;
@@ -266,20 +266,24 @@ button {
     position: relative;
     display: inline-block;
 }
+
 input {
     border: 1px solid transparent;
     background-color: white;
     padding: 10px;
     font-size: 16px;
 }
+
 input[type=text] {
     background-color: #f1f1f1;
     /*width: 100%;*/
 }
+
 input[type=password] {
     background-color: #f1f1f1;
     /*width: 100%;*/
 }
+
 input[type=submit] {
     background-color: DodgerBlue;
     color: #fff;
@@ -299,25 +303,25 @@ input[type=submit] {
     border-radius: .25rem;
 }
 
-.click{
+.click {
     font-size: 25px;
-    color : darkgray;
+    color: darkgray;
 }
 
 
-.click:hover{
-    color : darkorange;
-    text-decoration:underline;
+.click:hover {
+    color: darkorange;
+    text-decoration: underline;
 }
 
 
 .area-write {
     width: 538px;
-    position:relative;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top : 250px;
+    margin-top: 250px;
 }
 
 
@@ -358,6 +362,7 @@ textarea.field::placeholder {
     margin-bottom: 10px;
     border-radius: 10px;
 }
+
 /*////*/
 .card {
     width: 538px;
@@ -412,28 +417,31 @@ textarea.field::placeholder {
     width: 100px;
     margin-bottom: 60px;
 }
-.date{
-    font-size : 13px;
+
+.date {
+    font-size: 13px;
 }
 
-.username{
-    font-size : 13px;
-    margin-top : 1px;
+.username {
+    font-size: 13px;
+    margin-top: 1px;
 }
-.more_btn{
+
+.more_btn {
     margin-top: 20px;
 }
-.mytitle{
+
+.mytitle {
     font-weight: bold;
     margin-top: 20px;
     margin-left: 5px;
-    font-size : 20px;
+    font-size: 20px;
 }
 
-.mytext{
+.mytext {
     font-weight: bold;
     margin: 20px 0 15px 5px;
-    font-size : 20px;
+    font-size: 20px;
 }
 
 .footer {
@@ -467,4 +475,38 @@ textarea.field::placeholder {
     right: 19px;
     width: 14px;
     height: 18px;
+}
+
+.user {
+    position: absolute;
+    top: 48px;
+    right: 150px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.user1 {
+    position: absolute;
+    top: 80px;
+    right: 150px;
+    font-size: 18px;
+    font-family: SpoqaHanSansNeo;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0.36px;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: underline;
 }

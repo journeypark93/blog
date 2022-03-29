@@ -216,15 +216,24 @@
 
         //댓글 삭제
         function deleteComment(id) {
-            $.ajax({
-                type: "DELETE",
-                url: `/api/comments/${id}`,
-                success: function (response) {
-                    alert('메시지 삭제에 성공하였습니다.');
-                    window.location.reload();
-                }
-            })
+
+            if(confirm("정말 삭제하시겠습니까 ?") == true){
+
+                $.ajax({
+                    type: "DELETE",
+                    url: `/api/comments/${id}`,
+                    success: function (response) {
+                        alert('댓글 삭제에 성공하였습니다.');
+                        window.location.reload();
+                    }
+                })
+            }
+            else{
+                return ;
+            }
         }
+
+
 
         // 댓글 수정
         function submitEdit(id) {
@@ -260,6 +269,8 @@
 
 <body>
 <div class="header" style="position:relative;">
+    <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
+    <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
     <div id="header-title-login-user">
         <span>나만의 항해</span>
     </div>
