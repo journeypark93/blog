@@ -23,7 +23,21 @@
         $(document).ready(function () {
             // HTML 문서를 로드할 때마다 실행합니다.
             getMessages();
+            showLog();
         })
+
+        //회원가입, 로그인, 로그아웃 가리고 보이기
+        function showLog(){
+            let userRole = $('#user').val();
+            console.log(userRole);
+            if(userRole == "true") {
+                $(`#logout-text`).show();
+                $(`#login-text`).hide();
+            } else{
+                $(`#logout-text`).hide();
+                $(`#login-text`).show();
+            }
+        }
 
         // 메모를 불러와서 보여줍니다.
         function getMessages() {
@@ -78,13 +92,31 @@
             // 2. #cards-box 에 HTML을 붙인다.
             $('#cards-box').append(tempHtml);
         }
+
+
+//비로그인자도 되면 수정하세요~
+        function postComment(){
+            let userRole = $('#user').val();
+            console.log(userRole);
+            if(userRole == "ture"){
+                alert("로그인이 필요합니다.");
+                document.location.href='/user/signup';
+            } else{
+                document.location.href='/write';
+            }
+        }
+
+
+
     </script>
 </head>
 
 <body>
 <div class="header" style="position:relative;">
-    <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
-    <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
+    <span id="login-text">
+        <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
+        <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
+    </span>
     <div id="header-title-login-user">
         <span>나만의 항해</span>
         <span th:text="${username}"></span> 님의
@@ -94,7 +126,7 @@
     </div>
     <img src="images/bae.png" alt="" width="100px">
     <div>
-        <span style="cursor:pointer;" class="click" onclick="location.href='/write'">글쓰기</span>
+        <span style="cursor:pointer;" class="click" onclick="postComment()">글쓰기</span>
     </div>
     <form id="my_form" method="post" action="/user/logout">
         <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>
@@ -104,7 +136,8 @@
 <div id="cards-box" class="area-read">
 </div>
 
-<div th:if="${admin_role}" id="admin"></div>
+<input type="hidden" id="user" th:value="${user_role}"/>
+
 </body>
 
 </html>

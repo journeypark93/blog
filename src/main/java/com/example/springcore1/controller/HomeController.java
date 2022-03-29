@@ -15,8 +15,8 @@ public class HomeController {
     public String home(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         model.addAttribute("username", userDetails.getUsername());
 
-        if(userDetails.getUser().getRole() == UserRoleEnum.ADMIN){
-            model.addAttribute("admin_role", true);
+        if(userDetails.getUser().getRole() == UserRoleEnum.USER){
+            model.addAttribute("user_role", true);
         }
         return "index";
     }
@@ -36,6 +36,10 @@ public class HomeController {
     @GetMapping("/blogs/comment")
     public String comment(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
         model.addAttribute("username", userDetails.getUsername());
+
+        if(userDetails.getUser().getRole() == UserRoleEnum.USER){
+            model.addAttribute("user_role", true);
+        }
         return "comment";
     }
 }

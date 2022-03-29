@@ -17,6 +17,7 @@
     <script>
         // 수정 버튼을 눌렀을 때, 기존 작성 내용을 textarea 에 전달합니다.
         // 숨길 버튼을 숨기고, 나타낼 버튼을 나타냅니다.
+
         function editPost(id) {
             showEdits(id);
             let comment = $(`#${id}-comment`).text().trim();
@@ -37,6 +38,7 @@
 
             getMessages();
             getComments();
+            showLog();
         })
 
         // 사용자가 내용을 올바르게 입력하였는지 확인합니다.
@@ -53,12 +55,26 @@
         }
 
 
+        //stringquery id 값 가져오기
         function searchParam(key) {
             return new URLSearchParams(location.search).get(key);
         }
 
+        //회원가입, 로그인, 로그아웃 가리고 보이기
+        function showLog(){
+            let userRole = $('#user').val();
+            if(userRole == "true") {
+                $(`#logout-text`).show();
+                $(`#login-text`).hide();
+            } else{
+                $(`#logout-text`).hide();
+                $(`#login-text`).show();
+            }
+        }
+
         //더보기 글 내용 보기
         function getMessages() {
+
             let my_id = searchParam('id');
             $.ajax({
                 type: 'GET',
@@ -90,7 +106,7 @@
                             ${modifiedAt}
                         </div>
                         <div id="${id}-username" class="username">
-                            <span>작성자 : </span> ${username}
+                            ${username}
                         </div>
                     </div>
 
@@ -104,12 +120,17 @@
                         </div>
                     </div>
 
-                    <div class="footer">
+                    <div id="${id}-footer" class="footer">
                         <img src="/images/delete.png" class="icon-delete" alt="" onclick="deleteOne('${id}')">
                     </div>
                 </div>`;
             // 2. #cards-box 에 HTML을 붙인다.
             $('#cards-box').append(tempHtml);
+
+            let realuser = $('#username').val();
+            if(realuser != username){
+                $(`#${id}-footer`).hide();
+            }
         }
 
         //POST한 글 삭제
@@ -129,6 +150,13 @@
             let userid = searchParam('id');
             let username = $('#username').val();
             let comments = $('#comments').val();
+            let user_role = $('#user').val();
+
+//비로그인자도 되면 수정하세요~
+            if(user_role != "true"){
+                alert("로그인이 필요합니다.");
+                document.location.href('/user/login');
+            }
 
             if (isValidContents(comments) == false) {
                 return;
@@ -188,7 +216,7 @@
                             ${modifiedAt}
                         </div>
                         <div id="${id}-username" class="username">
-                            <span>작성자 : </span> ${username}
+                            ${username}
                         </div>
                     </div>
                     <!-- 댓글 조회 영역-->
@@ -201,7 +229,7 @@
                         </div>
                     </div>
                     <!-- 버튼 영역-->
-                    <div class="footer myfooter">
+                    <div id="${id}-foot" class="footer myfooter">
                         <img id="${id}-edit" class="icon-start-edit" src="/images/edit.png" alt=""
                              onclick="editPost('${id}')">
                         <img id="${id}-delete" class="icon-delete" src="/images/delete.png" alt=""
@@ -212,6 +240,12 @@
                 </div>`;
             // 2. #cards-box 에 HTML을 붙인다.
             $('#comments-box').append(tempHtml);
+
+            let realuser = $('#username').val();
+            console.log(realuser, username);
+            if(realuser != username){
+                $(`#${id}-foot`).hide();
+            }
         }
 
         //댓글 삭제
@@ -269,8 +303,11 @@
 
 <body>
 <div class="header" style="position:relative;">
-    <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
-    <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
+    <span id="login-text">
+        <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
+        <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
+    </span>
+
     <div id="header-title-login-user">
         <span>나만의 항해</span>
     </div>
@@ -298,10 +335,9 @@
 </div>
 
 <div id="comments-box">
-
 </div>
 
-<div th:if="${admin_role}" id="admin"></div>
+<input type="hidden" id="user" th:value="${user_role}"/>
 
 
 </body>
