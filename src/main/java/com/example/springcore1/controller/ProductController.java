@@ -2,9 +2,7 @@ package com.example.springcore1.controller;
 
 import com.example.springcore1.dto.ProductMypriceRequestDto;
 import com.example.springcore1.dto.ProductRequestDto;
-import com.example.springcore1.model.Product;
 import com.example.springcore1.model.UserRoleEnum;
-import com.example.springcore1.service.ProductService;
 import com.example.springcore1.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;

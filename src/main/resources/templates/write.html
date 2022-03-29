@@ -48,7 +48,7 @@
                 data: JSON.stringify(data),
                 success: function (response) {
                     alert('메시지가 성공적으로 작성되었습니다.');
-                    document.location.href = '/';
+                    document.location.href = '/home';
                 }
             })
         }
@@ -67,7 +67,7 @@
         </div>
         <img src="images/bae.png" alt="" width="100px">
         <div>
-            <span style="cursor:pointer;" class="click" onclick="location.href='/'">HOME</span>
+            <span style="cursor:pointer;" class="click" onclick="location.href='/home'">HOME</span>
         </div>
         <form id="my_form" method="post" action="/user/logout">
             <a id="logout-text" href="javascript:{}" onclick="document.getElementById('my_form').submit();">로그아웃</a>

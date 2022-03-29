@@ -72,6 +72,15 @@
             }
         }
 
+        function home(){
+            let userRole = $('#user').val();
+            if(userRole == "true") {
+                document.location.href='/home';
+            } else{
+                document.location.href='/';
+            }
+        }
+
         //더보기 글 내용 보기
         function getMessages() {
 
@@ -305,7 +314,7 @@
 <div class="header" style="position:relative;">
     <span id="login-text">
         <span style="cursor:pointer;" class="user" onclick="location.href='/user/login'">로그인</span>
-        <span style="cursor:pointer;" class="user1" onclick="location.href='/user/singup'">회원가입</span>
+        <span style="cursor:pointer;" class="user1" onclick="location.href='/user/signup'">회원가입</span>
     </span>
 
     <div id="header-title-login-user">
@@ -316,7 +325,7 @@
     </div>
     <img src="/images/bae.png" alt="" width="100px">
     <div>
-        <span style="cursor:pointer;" class="click" onclick="location.href='/'">HOME</span>
+        <span style="cursor:pointer;" class="click" onclick="home()">HOME</span>
     </div>
 
     <form id="my_form" method="post" action="/user/logout">
