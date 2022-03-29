@@ -1,13 +1,12 @@
 package com.example.springcore1.controller;
 
+import com.example.springcore1.dto.BlogRequestDto;
 import com.example.springcore1.dto.CommentRequestDto;
 import com.example.springcore1.model.Comment;
 import com.example.springcore1.repository.CommentRepository;
+import com.example.springcore1.service.CommentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
 @RestController
 public class CommentController {
     private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
 
     //생성(Create)
@@ -31,5 +31,17 @@ public class CommentController {
         return commentRepository.findAllByOrderByModifiedAtDesc();
     }
 
+    //삭제(Delete)
+    @DeleteMapping("/api/comments/{id}")
+    public Long deleteComment(@PathVariable Long id) {
+        commentRepository.deleteById(id);
+        return id;
+    }
+
+    //수정(Update)
+    @PutMapping("/api/comments/{id}")
+    public Long updateComment(@PathVariable Long id, @RequestBody CommentRequestDto requestDto) {
+        return commentService.update(id, requestDto);
+    }
 
 }

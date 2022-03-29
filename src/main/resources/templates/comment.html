@@ -15,6 +15,24 @@
     <title>더보기</title>
 
     <script>
+        // 수정 버튼을 눌렀을 때, 기존 작성 내용을 textarea 에 전달합니다.
+        // 숨길 버튼을 숨기고, 나타낼 버튼을 나타냅니다.
+        function editPost(id) {
+            showEdits(id);
+            let comment = $(`#${id}-comment`).text().trim();
+            $(`#${id}-textarea`).val(comment);
+        }
+
+        function showEdits(id) {
+            $(`#${id}-editarea`).show();
+            $(`#${id}-submit`).show();
+            $(`#${id}-delete`).show();
+
+            $(`#${id}-comment`).hide();
+            $(`#${id}-edit`).hide();
+        }
+
+        //화면이 시작될때 바로 함수를 호출합니다.
         $(document).ready(function () {
 
             getMessages();
@@ -46,19 +64,23 @@
                 type: 'GET',
                 url: '/api/blogs/',
                 success: function (response) {
-                    let len = response.length;
-                    let blog = response[len - my_id];
-                    let id = blog.id;
-                    let username = blog.username;
-                    let title = blog.title;
-                    let contents = blog.contents;
-                    let date = blog.modifiedAt;
-                    let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
-                    addHTML(id, username, title, contents, modifiedAt);
+                    for (let i = 0; i < response.length; i++) {
+                        let blog = response[i];
+                        let id = blog.id;
+                        let username = blog.username;
+                        let title = blog.title;
+                        let contents = blog.contents;
+                        let date = blog.modifiedAt;
+                        let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
+                        if (my_id == id) {
+                            addHTML(id, username, title, contents, modifiedAt);
+                        }
+                    }
                 }
             })
         }
 
+        //더보기 post html 붙이기
         function addHTML(id, username, title, contents, modifiedAt) {
             let tempHtml = `
                 <div class="card">
@@ -83,17 +105,27 @@
                     </div>
 
                     <div class="footer">
-                        <img src="/images/delete.png" class="icon-delete" alt="">
-<!--                        onclick="writePost()"-->
+                        <img src="/images/delete.png" class="icon-delete" alt="" onclick="deleteOne('${id}')">
                     </div>
                 </div>`;
             // 2. #cards-box 에 HTML을 붙인다.
             $('#cards-box').append(tempHtml);
         }
 
+        //POST한 글 삭제
+        function deleteOne(id) {
+            $.ajax({
+                type: "DELETE",
+                url: `/api/blogs/${id}`,
+                success: function (response) {
+                    alert('메시지 삭제에 성공하였습니다.');
+                    document.location.href = '/';
+                }
+            })
+        }
 
-//여기부터 고쳐주세요~~~ id 값이 자동생성되면서, 중구난방되브러요요요~~~
-        function writeComment(){
+        //댓글 작성 post 하기
+        function writeComment() {
             let userid = searchParam('id');
             let username = $('#username').val();
             let comments = $('#comments').val();
@@ -102,7 +134,7 @@
                 return;
             }
 
-            let data = {'userid':userid,'username': username, 'comments': comments};
+            let data = {'userid': userid, 'username': username, 'comments': comments};
 
             $.ajax({
                 type: "POST",
@@ -115,7 +147,6 @@
                 }
             })
         }
-
 
 
         // 댓글을 불러와서 보여줍니다.
@@ -137,7 +168,7 @@
                         let comment = comments.comments;
                         let date = comments.modifiedAt;
                         let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
-                        if (userid == parmid){
+                        if (userid == parmid) {
                             addHTML2(id, username, comment, modifiedAt);
                         }
                     }
@@ -163,13 +194,67 @@
                     <!-- 댓글 조회 영역-->
                     <div class="contents">
                         <div id="${id}-comment" class="title mytitle">
-                            <span>댓글 : </span> ${comment}
+                            ${comment}
                         </div>
+                        <div id="${id}-editarea" class="edit">
+                            <textarea id="${id}-textarea" class="te-edit" cols="30" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <!-- 버튼 영역-->
+                    <div class="footer myfooter">
+                        <img id="${id}-edit" class="icon-start-edit" src="/images/edit.png" alt=""
+                             onclick="editPost('${id}')">
+                        <img id="${id}-delete" class="icon-delete" src="/images/delete.png" alt=""
+                             onclick="deleteComment('${id}')">
+                        <img id="${id}-submit" class="icon-end-edit" src="/images/done.png" alt=""
+                             onclick="submitEdit('${id}')">
                     </div>
                 </div>`;
             // 2. #cards-box 에 HTML을 붙인다.
             $('#comments-box').append(tempHtml);
         }
+
+        //댓글 삭제
+        function deleteComment(id) {
+            $.ajax({
+                type: "DELETE",
+                url: `/api/comments/${id}`,
+                success: function (response) {
+                    alert('메시지 삭제에 성공하였습니다.');
+                    window.location.reload();
+                }
+            })
+        }
+
+        // 댓글 수정
+        function submitEdit(id) {
+            // 1. 작성 대상 메모의 username과 contents 를 확인합니다.
+            let username = $(`#${id}-username`).text().trim();
+            let comments = $(`#${id}-textarea`).val().trim();
+            let userid = searchParam('id');
+
+            // 2. 작성한 메모가 올바른지 isValidContents 함수를 통해 확인합니다.
+            if (isValidContents(comments) == false) {
+                return;
+            }
+
+            // 3. 전달할 data JSON으로 만듭니다.
+            let data = {'userid':userid, 'username': username, 'comments': comments};
+
+            // 4. PUT /api/memos/{id} 에 data를 전달합니다.
+            $.ajax({
+                type: "PUT",
+                url: `/api/comments/${id}`,
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                    alert('메시지 변경에 성공하였습니다.');
+                    window.location.reload();
+                }
+            });
+        }
+
+
     </script>
 
 

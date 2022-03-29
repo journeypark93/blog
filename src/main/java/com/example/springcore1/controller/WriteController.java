@@ -4,10 +4,7 @@ import com.example.springcore1.dto.BlogRequestDto;
 import com.example.springcore1.model.Blog;
 import com.example.springcore1.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,10 @@ public class WriteController {
         return blogRepository.findAllByOrderByModifiedAtDesc();
     }
 
-
+    //삭제(Delete)
+    @DeleteMapping("/api/blogs/{id}")
+    public Long deleteCourse(@PathVariable Long id) {
+        blogRepository.deleteById(id);
+        return id;
+    }
 }

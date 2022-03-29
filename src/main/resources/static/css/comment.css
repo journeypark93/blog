@@ -148,7 +148,7 @@ textarea.field::placeholder {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 12px;
+    margin-top: 20px;
     display: table;
 }
 
@@ -221,6 +221,20 @@ textarea.field::placeholder {
     height: 40px;
 }
 
+.contents div.edit {
+    display: none;
+}
+
+.contents textarea.te-edit {
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    resize: none;
+    border-bottom: 1px solid #212529;
+    width: 100%;
+    font-family: 'Spoqa Han Sans';
+}
+
 .footer img.icon-start-edit {
     cursor: pointer;
     position: absolute;
@@ -247,4 +261,8 @@ textarea.field::placeholder {
     right: 19px;
     width: 14px;
     height: 18px;
+}
+
+.myfooter{
+    height: 50px;
 }
