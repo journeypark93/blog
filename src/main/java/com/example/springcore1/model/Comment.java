@@ -13,11 +13,15 @@ import javax.persistence.*;
 @Setter
 @Getter  //생성자에 대한 getter 생성해줌
 @Entity //테이블과 연관됨을 스프링에게 알림
+
 public class Comment extends Timestamped {
     //id 자동으로 증가하여 db에 저장, id로 식별
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+
+    @Column(nullable = false)
+    private Long userid;
 
     @Column(nullable = false)
     private String username;
@@ -27,12 +31,14 @@ public class Comment extends Timestamped {
 
 
     //생성자 생성
-    public Comment(String username, String comments){
+    public Comment(Long userid, String username, String comments){
+        this.userid = userid;
         this.username = username;
         this.comments = comments;
     }
 
     public Comment(CommentRequestDto requestDto){
+        this.userid = requestDto.getUserid();
         this.username = requestDto.getUsername();
         this.comments = requestDto.getComments();
     }
@@ -40,6 +46,7 @@ public class Comment extends Timestamped {
 
     //update 기능
     public void update(CommentRequestDto requestDto){
+        this.userid = requestDto.getUserid();
         this.username = requestDto.getUsername();
         this.comments = requestDto.getComments();
     }

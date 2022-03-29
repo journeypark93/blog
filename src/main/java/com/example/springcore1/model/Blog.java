@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity //테이블과 연관됨을 스프링에게 알림
 public class Blog extends Timestamped {
     //id 자동으로 증가하여 db에 저장, id로 식별
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 

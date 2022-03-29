@@ -21,18 +21,32 @@
             getComments();
         })
 
+        // 사용자가 내용을 올바르게 입력하였는지 확인합니다.
+        function isValidContents(comments) {
+            if (comments == '') {
+                alert('내용을 입력해주세요');
+                return false;
+            }
+            if (comments.trim().length > 140) {
+                alert('공백 포함 140자 이하로 입력해주세요');
+                return false;
+            }
+            return true;
+        }
+
+
         function searchParam(key) {
             return new URLSearchParams(location.search).get(key);
         }
 
-
+        //더보기 글 내용 보기
         function getMessages() {
             let my_id = searchParam('id');
             $.ajax({
                 type: 'GET',
                 url: '/api/blogs/',
                 success: function (response) {
-                    let len = response.length + 1;
+                    let len = response.length;
                     let blog = response[len - my_id];
                     let id = blog.id;
                     let username = blog.username;
@@ -40,7 +54,6 @@
                     let contents = blog.contents;
                     let date = blog.modifiedAt;
                     let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
-                    console.log(id);
                     addHTML(id, username, title, contents, modifiedAt);
                 }
             })
@@ -81,16 +94,20 @@
 
 //여기부터 고쳐주세요~~~ id 값이 자동생성되면서, 중구난방되브러요요요~~~
         function writeComment(){
-            // let id = searchParam('id');
+            let userid = searchParam('id');
             let username = $('#username').val();
             let comments = $('#comments').val();
-            // 4. 전달할 data JSON으로 만듭니다.
-            let data = {'username': username, 'comments': comments};
-            // 5. POST /api/memos 에 data를 전달합니다.
+
+            if (isValidContents(comments) == false) {
+                return;
+            }
+
+            let data = {'userid':userid,'username': username, 'comments': comments};
+
             $.ajax({
                 type: "POST",
                 url: "/comments",
-                contentType: "application/json", // JSON 형식으로 전달함을 알리기
+                contentType: "application/json",
                 data: JSON.stringify(data),
                 success: function (response) {
                     alert('댓글이 성공적으로 작성되었습니다.');
@@ -101,11 +118,13 @@
 
 
 
-        // 메모를 불러와서 보여줍니다.
+        // 댓글을 불러와서 보여줍니다.
         function getComments() {
-            // 1. 기존 메모 내용을 지웁니다.
+
             $('#comments-box').empty();
-            // 2. 메모 목록을 불러와서 HTML로 붙입니다.
+
+            let parmid = searchParam('id');
+
             $.ajax({
                 type: 'GET',
                 url: '/api/comments/',
@@ -113,11 +132,14 @@
                     for (let i = 0; i < response.length; i++) {
                         let comments = response[i];
                         let id = comments.id;
+                        let userid = comments.userid;
                         let username = comments.username;
                         let comment = comments.comments;
                         let date = comments.modifiedAt;
                         let modifiedAt = date.substring(0, 10) + " (" + date.substring(11, 16) + ")";
-                        addHTML2(id, username, comment, modifiedAt);
+                        if (userid == parmid){
+                            addHTML2(id, username, comment, modifiedAt);
+                        }
                     }
                 }
             })

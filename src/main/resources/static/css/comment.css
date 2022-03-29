@@ -149,6 +149,7 @@ textarea.field::placeholder {
     left: 50%;
     transform: translate(-50%, -50%);
     margin-top: 12px;
+    display: table;
 }
 
 .card .metadata {
@@ -242,7 +243,7 @@ textarea.field::placeholder {
 .footer img.icon-delete {
     cursor: pointer;
     position: absolute;
-    bottom: 50px;
+    bottom: 15px;
     right: 19px;
     width: 14px;
     height: 18px;

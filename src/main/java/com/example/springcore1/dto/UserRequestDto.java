@@ -4,7 +4,6 @@ package com.example.springcore1.dto;
 
 import lombok.*;
 
-import javax.sql.RowSet;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -16,7 +15,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserRequestDto {
 
-//    @Size(min=3)
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     @Pattern(regexp = "[a-zA-Z0-9]{3,100}$", message = "아이디는 특수문자, 한글을 제외한 3자리 이상입니다.")
     private String username;
