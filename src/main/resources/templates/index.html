@@ -39,6 +39,16 @@
             }
         }
 
+        // function showComment(){
+        //     let userRole = $('#user').val();
+        //     let myId = $(`#id`);
+        //     if(userRole == "true") {
+        //         document.location.href='/blogs/comment?id=${id}';
+        //     } else{
+        //         document.location.href='/blogs/comment/view';
+        //     }
+        // }
+
         // 메모를 불러와서 보여줍니다.
         function getMessages() {
             // 1. 기존 메모 내용을 지웁니다.
@@ -98,9 +108,9 @@
         function postComment(){
             let userRole = $('#user').val();
             console.log(userRole);
-            if(userRole == "ture"){
+            if(userRole != "true"){
                 alert("로그인이 필요합니다.");
-                document.location.href='/user/signup';
+                document.location.href='/user/login';
             } else{
                 document.location.href='/write';
             }

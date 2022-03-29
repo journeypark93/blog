@@ -33,11 +33,18 @@ public class HomeController {
     public String write(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
         model.addAttribute("username", userDetails.getUsername());
 
-//        if(userDetails.getUser().getRole() != "USER") {
-//            return "index";
+//        if(userDetails.getUser().getRole() != UserRoleEnum.USER) {
+//            return "redirect:/user/login";
 //        }
         return "write";
     }
+
+    @GetMapping("/blogs/comment/view")
+    public String viewComment(){
+
+        return "comment";
+    }
+
 
     @GetMapping("/blogs/comment")
     public String comment(Model model, @AuthenticationPrincipal UserDetailsImpl userDetails){
