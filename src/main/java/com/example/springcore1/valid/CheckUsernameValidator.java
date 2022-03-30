@@ -15,6 +15,7 @@ public class CheckUsernameValidator extends AbstractValidator<UserRequestDto> {
 
     @Override
     protected void doValidate(UserRequestDto dto, Errors errors) {
+        //아이디 중복 여부
         if (userRepository.existsByUsername(dto.getUsername())) {
             errors.rejectValue("username", "아이디 중복 오류", "이미 사용중인 아이디 입니다.");
         }
@@ -30,6 +31,11 @@ public class CheckUsernameValidator extends AbstractValidator<UserRequestDto> {
         // 회원 ID, Password 포함여부
         if (userPwd.contains(dto.getUsername())) {
             errors.rejectValue("password", "아이디 포함 오류", "비밀번호에 아이디를 포함할 수 없습니다.");
+        }
+
+        //이메일 중복 여부
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            errors.rejectValue("email", "이메일 포함 오류", "이미 등록된 이메일입니다.");
         }
     }
 }

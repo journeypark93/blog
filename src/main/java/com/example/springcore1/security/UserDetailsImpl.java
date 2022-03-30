@@ -2,6 +2,7 @@ package com.example.springcore1.security;
 
 import com.example.springcore1.model.User;
 import com.example.springcore1.model.UserRoleEnum;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
 
 public class UserDetailsImpl implements UserDetails {
 
