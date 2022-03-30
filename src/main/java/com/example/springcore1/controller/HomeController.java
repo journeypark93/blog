@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 
 @Controller
 public class HomeController {
@@ -51,6 +54,12 @@ public class HomeController {
             model.addAttribute("user_role", true);
         }
         return "comment";
+    }
+
+    //우리나라시간 변경
+    @PostConstruct
+    public void started(){
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
     }
 }
 

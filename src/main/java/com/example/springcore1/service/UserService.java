@@ -31,6 +31,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    //유효성 검사
     @Transactional
     public Map<String, String> validateHandling(Errors errors) {
         Map<String, String> validatorResult = new HashMap<>(); /* 유효성 검사에 실패한 필드 목록을 받음 */
@@ -42,22 +43,13 @@ public class UserService {
     }
 
     public void registerUser(UserRequestDto requestDto) {
-        // 회원 ID 중복 확인
+        // 회원 ID 받아오기
         String username = requestDto.getUsername();
-        Optional<User> found = userRepository.findByUsername(username);
-        if (found.isPresent()) {
-            throw new IllegalArgumentException("중복된 사용자 ID 가 존재합니다.");
-        }
-
-        // 회원 ID, Password 포함여부
-//        String userPwd = requestDto.getPassword();
-//        String pwdCheck = requestDto.getPassword2();
-//        if(userPwd.equals(pwdCheck)) {
-//            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-//        }
 
         // 패스워드 암호화
         String password = passwordEncoder.encode(requestDto.getPassword());
+
+        //email 받아오기
         String email = requestDto.getEmail();
 
         // 사용자 ROLE 확인

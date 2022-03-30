@@ -3,7 +3,7 @@ package com.example.springcore1.controller;
 import com.example.springcore1.dto.UserRequestDto;
 import com.example.springcore1.service.KakaoUserService;
 import com.example.springcore1.service.UserService;
-import com.example.springcore1.valid.CheckUsernameValidator;
+import com.example.springcore1.validator.CheckUsernameValidator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

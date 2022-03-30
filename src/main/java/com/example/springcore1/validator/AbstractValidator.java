@@ -1,4 +1,4 @@
-package com.example.springcore1.valid;
+package com.example.springcore1.validator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.Errors;

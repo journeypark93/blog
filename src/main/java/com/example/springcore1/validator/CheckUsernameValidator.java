@@ -1,4 +1,4 @@
-package com.example.springcore1.valid;
+package com.example.springcore1.validator;
 
 import com.example.springcore1.dto.UserRequestDto;
 import com.example.springcore1.repository.UserRepository;
