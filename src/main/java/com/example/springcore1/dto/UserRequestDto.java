@@ -2,6 +2,7 @@
 
 package com.example.springcore1.dto;
 
+import com.example.springcore1.model.UserRoleEnum;
 import lombok.*;
 
 import javax.validation.constraints.Email;

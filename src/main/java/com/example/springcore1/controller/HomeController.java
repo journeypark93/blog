@@ -56,7 +56,7 @@ public class HomeController {
         return "comment";
     }
 
-    //우리나라시간 변경
+    //시간 변경
     @PostConstruct
     public void started(){
         TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));

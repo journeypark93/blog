@@ -73,7 +73,7 @@ public class UserController {
                 model.addAttribute(key, validatorResult.get(key));
             }
 
-            return "/signup";
+            return "signup";
         }
 
         userService.registerUser(requestDto);
