@@ -13,6 +13,7 @@ import java.util.Objects;
 public class CheckUsernameValidator extends AbstractValidator<UserRequestDto> {
     private final UserRepository userRepository;
 
+
     @Override
     protected void doValidate(UserRequestDto dto, Errors errors) {
         //아이디 중복 여부
